@@ -1,0 +1,5 @@
+psutil
+bert-score
+sentence-transformers
+nltk
+rouge-score
