@@ -21,13 +21,13 @@ All metrics are computed as **max over multiple ground-truth references**.
 
 | Metric | Key | Role | Implementation |
 |--------|-----|------|----------------|
-| BERTScore-F1 | `bertscore_f1` | **Primary** | `roberta-large`, rescaled with baseline |
-| NLI Entailment | `nli_entailment` | Secondary | `cross-encoder/nli-deberta-v3-base` entailment probability |
-| NLI × BERT | `nli_bertscore_f1` | Secondary | `nli_entailment * bertscore_f1` (negation-aware composite) |
-| BLEU-4 | `bleu_score` | Secondary | NLTK `sentence_bleu`, smoothing method 1 |
-| ROUGE-1 | `rouge1_score` | Secondary | `rouge-score` F-measure |
-| ROUGE-2 | `rouge2_score` | Secondary | `rouge-score` F-measure |
-| ROUGE-L | `rougeL_score` | Secondary | `rouge-score` F-measure |
+| BERTScore-F1 | `bertscore_f1` | **Only metric used for ranking and valid for challenge** | `roberta-large`, rescaled with baseline |
+| NLI Entailment | `nli_entailment` | Secondary (for testing/analysis only) | `cross-encoder/nli-deberta-v3-base` entailment probability |
+| NLI × BERT | `nli_bertscore_f1` | Secondary (for testing/analysis only) | `nli_entailment * bertscore_f1` (negation-aware composite) |
+| BLEU-4 | `bleu_score` | Secondary (for testing/analysis only) | NLTK `sentence_bleu`, smoothing method 1 |
+| ROUGE-1 | `rouge1_score` | Secondary (for testing/analysis only) | `rouge-score` F-measure |
+| ROUGE-2 | `rouge2_score` | Secondary (for testing/analysis only) | `rouge-score` F-measure |
+| ROUGE-L | `rougeL_score` | Secondary (for testing/analysis only) | `rouge-score` F-measure |
 
 **Why NLI?** Traditional text-similarity metrics (BERTScore, BLEU, ROUGE) are
 blind to negation — "forceps are used" and "forceps are **not** used" score
@@ -40,7 +40,7 @@ semantically incorrect answers even when surface forms are similar.
 ```jsonc
 {
   "aggregates": {                   // leaderboard reads this
-    "bertscore_f1": 0.82,           // PRIMARY ranking metric
+    "bertscore_f1": 0.82,           // ONLY metric used for ranking
     "nli_entailment": 0.95,
     "nli_bertscore_f1": 0.78,
     "bleu_score": ...,
